@@ -1,0 +1,30 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    require __DIR__ . '/vendor/autoload.php';
+
+    function sendMessage($pusher, string $channel, string $event, array $data)
+    {
+        $pusher->trigger($channel, $event, $data);
+    }
+
+    $options = [];   
+    $pusher = new Pusher\Pusher(
+        APP_KEY,
+        APP_SECRET,
+        APP_ID,
+        $options
+    );
+
+    $contratado = filter_input(INPUT_POST, 'contratado', FILTER_SANITIZE_STRING);
+    if ($contratado) {
+        sendMessage($pusher, 'teste-plas', 'lista-contratados', ['contratado' => $contratado]);
+    }
+
+    $demitido = filter_input(INPUT_POST, 'demitido', FILTER_SANITIZE_STRING);
+    if ($demitido) {
+        sendMessage($pusher, 'teste-plas', 'lista-demitidos', ['demitido' => $demitido]);
+    }
+
+}

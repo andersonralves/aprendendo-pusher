@@ -1,0 +1,23 @@
+var app = new Vue({
+    el: '#app',
+    data: {
+        contratados: [],
+        demitidos: []
+    }
+})
+
+Pusher.logToConsole = true;
+
+var pusher = new Pusher(APP_KEY, OPTIONS);
+
+var channel = pusher.subscribe('teste-plas');
+
+// contratados
+channel.bind('lista-contratados', function(data) {
+    app.contratados.push(data.contratado.toUpperCase() + ' - ' + (new Date()).toLocaleString()); 
+});
+
+// demitidos
+channel.bind('lista-demitidos', function(data) {
+    app.demitidos.push(data.demitido.toUpperCase() + ' - ' + (new Date()).toLocaleString()); 
+});

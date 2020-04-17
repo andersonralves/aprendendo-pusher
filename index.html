@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+
+</head>
+<body>
+
+    <a href="dashboard.php" target="_blank">Abrir Dashboard</a>
+
+    <div id="app">
+        <h1>Lista de Contratados</h1>
+
+        <ul>
+            <li v-for="contratado in contratados">
+                {{ contratado }}
+            </li>
+        </ul>  
+
+        <hr>
+
+        <h1>Lista de Demitidos</h1>
+            <ul>
+            <li v-for="demitido in demitidos">
+                {{ demitido }}
+            </li>
+        </ul>  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
+
